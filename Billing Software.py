@@ -7,6 +7,15 @@ import smtplib
 from tkinter import filedialog   # For file dialog
 #==========================================#
 #=====CLEAR BUTTON FUNCTION======#
+
+'''Step	Code / Function	What Happens
+1️⃣	import statements	Loads required libraries: tkinter, ttk, and psycopg2.
+2️⃣	Database connection	Connects Python program to PostgreSQL database using psycopg2.connect().
+3️⃣	class Student:	Class definition is loaded into memory but not executed yet.
+4️⃣	main = Tk()	Creates the main GUI application window.
+5️⃣	Student(main)	Creates an object → runs the __init__() method automatically to build the full interface (Frames, Buttons, Entry fields, Treeview table).
+6️⃣	main.mainloop()	Starts the Tkinter event loop — keeps window active and waits for user actions.
+🔁	Button Click (Add/Delete/Update/Clear)	When the user clicks a button, the linked function (Add, Delete, Update, or Clear) executes. Each performs its respective database operation (Insert, Delete, Update, or Clear fields).'''
 def clear():
       #DELETE ALL ENTRY FIELDS
       bathsoapEntry.delete(0,END)
