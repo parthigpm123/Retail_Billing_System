@@ -1,11 +1,14 @@
-from tkinter import *
-from tkinter import messagebox
-import os
-import smtplib
-import tempfile
-from tkinter import filedialog
+# REQUIREMENT LIBRARY FOR PROJECT
 
+from tkinter import *            #Tkinter Library
+from tkinter import messagebox    #Tkinter Messagebox Library
+import os                         #OS MODULE
+import smtplib
+from tkinter import filedialog   # For file dialog
+#==========================================#
+#=====CLEAR BUTTON FUNCTION======#
 def clear():
+      #DELETE ALL ENTRY FIELDS
       bathsoapEntry.delete(0,END)
       facecreamEntry.delete(0,END)
       hairgelEntry.delete(0,END)
@@ -27,6 +30,7 @@ def clear():
       spriteEntry.delete(0,END)
       frootiEntry.delete(0,END)
       
+      #INSERT 0 IN ALL PRODUCT ENTRY FIELDS
       bathsoapEntry.insert(0,0)
       facecreamEntry.insert(0,0)
       hairgelEntry.insert(0,0)
@@ -47,7 +51,7 @@ def clear():
       dewEntry.insert(0,0)
       spriteEntry.insert(0,0)
       frootiEntry.insert(0,0)
-      
+      #DELETE BILL MENU ENTRY FIELDS
       cosmetictaxEntry.delete(0,END)
       grocerytaxEntry.delete(0,END)
       drinkstaxEntry.delete(0,END)
@@ -63,11 +67,7 @@ def clear():
       
       textarea.delete(1.0,END)
       
-      
-      
-      
-      
-
+#SEND EMAIL FUNCTION
 def send_email():
       def send_gmail():
             try:
@@ -131,12 +131,12 @@ def send_email():
             sendbutton.grid(row=2,column=0,pady=20)
             
             
-            
+           #FUNCTION CALLING 
             root1.mainloop()
                
       
 
-
+# FUNCTION THROW ERROR
 # Function to calculate total (placeholder)
 
 # def print_bill():
@@ -156,6 +156,8 @@ def send_email():
 #             f.write(textarea.get(1.0, END))
 #         #os.startfile(file, "Print")
 #         os.startfile(file)  # Just open Notepad without print
+
+#PRINT BILL FUNCTION
 def print_bill():
     if textarea.get(1.0, END) == '\n':
         messagebox.showerror("Error", "No Bill to Print")
@@ -176,10 +178,7 @@ def print_bill():
                 messagebox.showerror("Error", f"Failed to save file:\n{e}")
 
 
-        
-             
-                 
-
+#SEARCH BILL BUTTON FUNCTION
 def search_bill():
       for i in os.listdir('bills/'):
             if i.split('.')[0]==billnumberEntry.get():
@@ -194,7 +193,8 @@ def search_bill():
 
 if not os.path.exists('bills'):
       os.makedirs('bills')
-
+      
+#SAVE BILL FUNCTION
 def save_bill():
       result=messagebox.askyesno("Confirm","Do you want to save the bill?")
       if result:
@@ -204,15 +204,16 @@ def save_bill():
             file.close()
             messagebox.showinfo("Saved",f"Bill no. : {billnumberEntry.get()} saved successfully")
             
-
+#GENERATE BILL AREA FUNCTION
 def bill_area():
+      #SHOW ERROR NULL VALUE
       if nameEntry.get()=="" or phoneEntry.get()=="":
           messagebox.showerror("Error","Customer details should be entered")
       elif cosmeticpriceEntry.get()=='' and grocerypriceEntry.get()=='' and drinkspriceEntry.get()=='':
           messagebox.showerror("Error","No Product Purchased")
       elif cosmeticpriceEntry.get()=='0 Rs' and grocerypriceEntry.get()=='0 Rs' and drinkspriceEntry.get()=='0 Rs':
           messagebox.showerror("Error","No Product Purchased")
-         
+       #GENERATE BILL  
       else:
             textarea.delete(1.0,END)
             textarea.insert(END,"\t\t***Welcome Customers***\n")
@@ -272,10 +273,9 @@ def bill_area():
             textarea.insert(END,"\n=======================================================\n")
             save_bill()
             
-                        
-                
-      
+# TOTAL BUTTON FUNCTION     
 def total():
+      #MAKE GLOBAL ENTRY FEILD
       global soapprice,facecreamprice,facewashprice,hairsprayprice,hairgelprice,bodyloationprice
       global riceprice,daalprice,oilprice,sugarprice,teaprice,wheatprice
       global maazaprice,frootiprice,dewprice,pepsiprice,spriteprice,cococolaprice
@@ -326,19 +326,13 @@ def total():
       
       totalbill=totalcosmeticprice+totalgroceryprice+totaldrinkprice+cosmetictax+grocerytax+drinkstax
       
-      
-      
-      
-      
-      
-      
-      
-      
 
 root=Tk()
 
+#=========================== Main Window Setup ============================
 root.title("Retail Billing System")
 root.geometry("1270x685")
+
 #root.iconbitmap("icon.ico")
 
 headingLabel=Label(root,text="Retail Billing System",font=("times new roman",30,"bold"),bg="blue2",fg="gold",bd=12,relief=GROOVE)
@@ -454,7 +448,7 @@ teaEntry=Entry(groceryframe,font=("times new roman",15,"bold"),width=10,bd=5)
 teaEntry.grid(row=5,column=1,padx=10)
 teaEntry.insert(0,0)
 
-#========COLD DRINKS====================#
+#========COLD DRINKS FRAME====================#
 
 ColdDrinks=LabelFrame(productsFrame,text='Cold Drinks',font=('times new roman',15,'bold'),fg='gold',bd=8,relief=GROOVE,bg='blue2')
 ColdDrinks.grid(row=0,column=2)
@@ -503,7 +497,7 @@ billframe.grid(row=0,column=3,padx=10)
 billareaLabel=Label(billframe,text='Bill Area',font=('times new roman',15,'bold'),bg="gold",fg="black",bd=7,relief=GROOVE)
 billareaLabel.pack(fill=X)
 
-#=====TEXT AREAR========
+#=====TEXT AREAR FRAME========
 scrollbar=Scrollbar(billframe,orient=VERTICAL)
 scrollbar.pack(side=RIGHT,fill=Y)
 textarea=Text(billframe,height=15,width=55,yscrollcommand=scrollbar.set)
@@ -511,7 +505,7 @@ textarea.pack()
 scrollbar.config(command=textarea.yview)
 
 
-#=========BILL MENU==========
+#=========BILL MENU FRAME==========
 billmenuFrame=LabelFrame(root,text='Bill Menu',font=('times new roman',15,'bold'),fg='gold',bd=8,relief=GROOVE,bg='blue2')
 billmenuFrame.pack()
 
@@ -530,7 +524,7 @@ drinkspriceLabel.grid(row=2,column=0,pady=6,padx=10,sticky='w')
 drinkspriceEntry=Entry(billmenuFrame,font=("times new roman",15,"bold"),width=10,bd=5)
 drinkspriceEntry.grid(row=2,column=1,pady=6,padx=10)
 
-#=====================cosmetic tax===========
+#=====================cosmetic tax FRAME===========
 cosmetictaxLabel=Label(billmenuFrame,text='Cosmetic Tax',font=("times new roman",13,"bold"),bg="blue2",fg="white")
 cosmetictaxLabel.grid(row=0,column=2,pady=6,padx=10,sticky='w')
 cosmetictaxEntry=Entry(billmenuFrame,font=("times new roman",15,"bold"),width=10,bd=5)
