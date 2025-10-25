@@ -3,7 +3,7 @@
 from tkinter import *            #Tkinter Library
 from tkinter import messagebox    #Tkinter Messagebox Library
 import os                         #OS MODULE
-import smtplib
+import smtplib                     #For sending email
 from tkinter import filedialog   # For file dialog
 #==========================================#
 #=====CLEAR BUTTON FUNCTION======#
